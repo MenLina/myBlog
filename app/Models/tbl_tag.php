@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class tbl_tag extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'frequency'];
 }

@@ -8,20 +8,20 @@
     <body class="container">
         @include('inc.header')
 
-        @if(Request::is('/'))
+        @if(Request::is('/') || Request::is('/home'))
             @include('inc.hero')
         @endif
 {{--        отображение на одной определенной страницк с помощью условного оператора if и Request(если находимся на главной странице , то..)--}}
-        <div>
-            <div class="row mt-5">
-                <div class="col-8">
+{{--        <div>--}}
+{{--            <div class="row mt-5">--}}
+{{--                <div class="col-10">--}}
                     @yield('content')
-                </div>
-                <div class="col-4">
-                    @include('inc.aside')
-                </div>
-            </div>
-        </div>
+{{--                </div>--}}
+{{--                <div class="col-2">--}}
+{{--                    @include('inc.aside')--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
         @include('inc.footer')
     </body>
 </html>
