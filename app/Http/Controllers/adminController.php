@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Post;
+use App\Models\tbl_comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
@@ -141,6 +142,31 @@ class adminController extends Controller
                 $tag->delete();
             }
         }
+    }
+
+    public function indexComments()
+    {
+        $comments = tbl_comment::with('post')
+            ->orderBy('status', 'desc')
+            ->get();
+        return view('comments', compact('comments'));
+    }
+
+    public function publishComment($id)
+    {
+        $comment = tbl_comment::find($id);
+        $comment->status = $comment->status == 'published' ? 'unpublish' : 'published';
+        $comment->save();
+
+        return redirect()->route('comments');
+    }
+
+    public function deleteComment($id)
+    {
+        $comment = tbl_comment::find($id);
+        $comment->delete();
+
+        return redirect()->route('comments');
     }
 }
 

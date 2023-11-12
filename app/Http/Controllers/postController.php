@@ -87,7 +87,7 @@ class postController extends Controller
     public function viewPost($id)
     {
         $post = Post::with(['comments' => function ($query) {
-            $query->orderBy('created_at', 'desc');
+            $query->orderBy('created_at', 'desc')->where('status', 'published');
         }, 'user'])->find($id);
         if (!$post) {
             // Обработайте случай, если пост не найден
@@ -122,19 +122,18 @@ class postController extends Controller
             'comment' => 'required|string',
         ]);
 
-
         $user_id = Auth::check() ? Auth::id() : 0;
 
         $defaultAuthor = Auth::check() ? Auth::user()->name : 'Guest';
         $defaultEmail = Auth::check() ? Auth::user()->email : 'guest@example.com';
-
+        $role = Auth::check() ? Auth::user()->role : 'user';
         tbl_comment::create([
             'user_id' => $user_id,
             'post_id' => $request->post_id,
             'author' => $request->author ?? $defaultAuthor,
             'email' => $request->email ?? $defaultEmail,
             'content' => $request->comment,
-            'status' => 'published',
+            'status' => $role == 'admin'  ? 'published' : 'unpublish',
         ]);
 
         return back()->with('success', 'Комментарий успешно добавлен.');

@@ -27,25 +27,19 @@
             </p>
             <hr>
         @endforeach
+        @if($post->status !== 'Archive')
+            <form action="{{ route('commentsStore') }}" method="post">
+                @csrf
 
-        <form action="{{ route('commentsStore') }}" method="post">
-            @csrf
-            @auth
-                <p>Здравствуйте, {{ auth()->user()->name }}!</p>
-                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-            @else
-                <p>Гость</p>
-                <input type="hidden" name="user_id" value="0">
-            @endauth
+                <input type="hidden" name="post_id" value="{{ $post->id }}">
 
-            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                <div class="form-group">
+                    <label for="comment">Your comment:</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="comment">Ваш комментарий:</label>
-                <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Оставить комментарий</button>
-        </form>
+                <button type="submit" class="btn btn-primary">Add comment</button>
+            </form>
+        @endif
     </div>
 @endsection

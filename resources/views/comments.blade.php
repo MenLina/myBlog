@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title-block')
-    Your posts
+    Comments
 @endsection
 
 @section('content')
@@ -25,16 +25,33 @@
             </tr>
             </thead>
             <tbody>
-
+            @foreach($comments as $comment)
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $comment->author }}</td>
+                    <td>{{ $comment->content }}</td>
+                    <td>{{ $comment->status }}</td>
+                    <td> <a  href="{{route('viewPost', $comment->post_id)}}">/viewPost/{{$comment->post_id}}</a></td>
+                    <td>{{ $comment->created_at }}</td>
+                    <td>
+                        <form action="{{ route('commentsPublish', $comment->id) }}" method="POST">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-info">
+                                {{ $comment->status === 'published' ? 'Unpublish' : 'Publish' }}
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ route('admin.comments.delete', $comment->id) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
                 </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
