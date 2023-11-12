@@ -60,9 +60,10 @@ Route::get('/tag/{tag}', 'App\Http\Controllers\postController@showPostsByTag')->
 
 Route::get('/tagCloud' , 'App\Http\Controllers\postController@allTags')->name('tagCloud');
 Route::post('/comments/store', 'App\Http\Controllers\postController@commentsStore')->name('commentsStore');
-Route::get('/comments', function (){
-    return view('comments');
-})->name('comments');
+
+Route::get('/comments', 'App\Http\Controllers\adminController@indexComments')->name('comments');
+Route::put('/comments/publish/{comment}', 'App\Http\Controllers\adminController@publishComment')->name('commentsPublish');
+Route::delete('/comments/delete/{comment}', 'App\Http\Controllers\adminController@deleteComment')->name('admin.comments.delete');
 
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
