@@ -7,7 +7,7 @@
 @section('content')
 <div class="row"></div>
 <h1>comments</h1>
-@if (Auth::check() && Auth::user()->role === 'admin')
+@if (Auth::check() && Auth::user()->role === 'Admin')
     <p>
         <a class="btn btn-info" href="{{route('yourPosts')}}">Your posts</a>
     </p>
@@ -37,7 +37,7 @@
                             @method('PUT')
                             @csrf
                             <button type="submit" class="btn btn-info">
-                                {{ $comment->status === 'published' ? 'Unpublish' : 'Publish' }}
+                                {{ $comment->status === 'Published' ? 'Unpublish' : 'Publish' }}
                             </button>
                         </form>
                     </td>

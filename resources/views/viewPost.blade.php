@@ -10,7 +10,7 @@
     <a class="ml-5" href="#">tag: {{ $post->tag }}</a>
     <div class="container">
         <div class="d-flex mt-5 border-1">
-            <img src="{{ asset('images/' . $post->image) }}" alt="Изображение поста" width="250" height="400">
+            <img src="{{ asset('images/' . $post->image) }}" class="mr-3" alt="Изображение поста" width="250" height="400">
             <div style="max-width: 600px; word-wrap: break-word;">
                 <p style="white-space: normal !important;">{{ $post->content }}</p>
             </div>

@@ -7,7 +7,7 @@
 @section('content')
     <div class="row"></div>
     <h1>Your posts</h1>
-    @if (Auth::check() && Auth::user()->role === 'admin')
+    @if (Auth::check() && Auth::user()->role === 'Admin')
         <p>
             <a class="btn btn-success" href="{{route('newPost')}}">New post</a>
             <a class="btn btn-info" href="{{route('comments')}}">Comments</a>
@@ -71,18 +71,16 @@
                                 @endif
                             </td>
                             <td>
-                                    <form method="POST" action="{{ route('deletePost', $post->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
+                                <form method="POST" action="{{ route('deletePost', $post->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
                             </td>
                         </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
-
     @endif
-
 @endsection

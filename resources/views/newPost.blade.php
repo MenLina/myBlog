@@ -6,7 +6,7 @@
 
 @section('content')
     <h1>new post</h1>
-    @if (Auth::check() && Auth::user()->role === 'admin')
+    @if (Auth::check() && Auth::user()->role === 'Admin')
     <form action="{{route('postForm')}}" method="post" enctype="multipart/form-data">
         @csrf
 
@@ -22,23 +22,6 @@
 
             <input class="mb-3 mt-3" type="file" name="filePost">
 
-            <p>
-                <label for="is_temporary">Temporary Post:</label>
-                <input type="checkbox" name="is_temporary" id="is_temporary">
-                <div id="temp_post_options" style="display:none;">
-                    <label for="expiration_time">Expiration Time:</label>
-                    <input type="datetime-local" name="expiration_time" id="expiration_time">
-                </div>
-            <label for="post_duration">Post Duration:</label>
-            <select name="post_duration" id="post_duration">
-                <option value="1">1 час</option>
-                <option value="3">3 часа</option>
-                <option value="6">6 часов</option>
-                <option value="12">12 часов</option>
-                <option value="24">1 день</option>
-                <option value="48">2 дня</option>
-            </select>
-            </p>
             <div>
                 <button class="btn btn-success" type="submit" name="action" value="newPost">New post</button>
                 <button class="btn btn-info" type="submit" name="action" value="save">Save</button>

@@ -1,0 +1,17 @@
+.header.dark-theme {
+    --background: transparent!important;/* Темный фон */
+    --text-color: #f1f1f1!important;
+}
+
+.container {
+    background: #36007a;
+    color: white;
+}
+
+.text-md-end {
+    color: black;
+}
+
+.card-header {
+    color: black;
+}
